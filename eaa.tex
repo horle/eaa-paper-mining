@@ -1,0 +1,98 @@
+\documentclass[xcolor=x11names, aspectratio=169]{beamer}
+\usepackage[british]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathpazo}
+\usepackage{enumerate}
+\usepackage{array,booktabs}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{verbatim}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usetikzlibrary{matrix,backgrounds,patterns,arrows,decorations.markings,shapes}
+\usepackage{caption}
+
+\usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
+
+\author[F.\ Kußmaul \&\ T.\ Evans]{{\Large Felix Kußmaul}\\[.2em]University of Cologne\\[1.2em]{\Large Dr Tim Evans}\\[.2em]University of York}
+\title[Mining Paper Catalogues]{\Large Mining Paper Catalogues}
+\subtitle{A Multilingual Solution to Reduce Verbose Fields to Key Words}
+\institute[Cologne, York]{European Association of Archaeologists 2017}
+\date[1 September 2017]{\ \\[.5em]1 September 2017}
+
+\input{config.tex}
+\definecolor{morange}{HTML}{FF8200}
+ 
+\begin{document}
+
+\maketitle
+
+\section{Motivation}
+
+\begin{frame}{Data Source}
+\begin{center}
+\begin{figure}
+\includegraphics[width=.875\paperwidth]{img/consp.jpg}
+\caption{Sample from \emph{Conspectus} catalog.}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\begin{minipage}[t]{0.45\textwidth}
+What we \textbf{have}:\bigskip
+
+\begin{figure}
+\includegraphics[width=1.05\textwidth]{img/consp_ex.jpg}
+\end{figure}
+\end{minipage}\hfill\pause
+\begin{minipage}[t]{0.45\textwidth}
+What we \textbf{want}:
+{\footnotesize
+\begin{verbatim}
+{
+   "form": "23.1",
+   "origin": "Italy",
+   "decoration": "none"
+},
+{
+   "form": "23.2",
+   "origin": "Italy, not Padana"
+}
+\end{verbatim}
+}
+\end{minipage}
+\end{frame}
+
+\begin{frame}\begin{center}
+\textbf{Problem:}
+Running texts contain \alert{a lot} of unnecessary information.
+
+Information scientists call them \textbf{redundancy}.
+\end{center}
+\end{frame}
+
+
+\section{Text Mining}%\printSectionYes
+
+\begin{frame}{Classification}
+\textbf{Text Mining} is a \alert{general term} covering several different ideas.\pause
+
+For instance:
+\begin{itemize}[<+->]
+\item Information retrieval
+\item Cluster analysis
+\item Statistical (lexical) analysis
+\item Predictive analytics
+\item \textbf{Information extraction}
+\item\dots
+\end{itemize}
+\end{frame}
+
+
+
+\maketitle
+
+\end{document}
