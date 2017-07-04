@@ -1,1 +1,1 @@
-# naa-slides
+# eaa-paper-mining

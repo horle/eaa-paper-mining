@@ -16,7 +16,7 @@
 
 \usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
 
-\author[F.\ Kußmaul \&\ T.\ Evans]{{\Large Felix Kußmaul}\\[.2em]University of Cologne\\[1.2em]{\Large Dr Tim Evans}\\[.2em]University of York}
+\author[F.\ Kußmaul \&\ T.\ Evans]{{\Large Felix Kußmaul}\hfill\raisebox{-.9em}{\includegraphics[width=4cm]{img/uco.jpg}}\\[1.2em]{\Large Dr Tim Evans}\hfill\raisebox{-.7em}{\includegraphics[width=4cm]{img/york.jpg}}}
 \title[Mining Paper Catalogues]{\Large Mining Paper Catalogues}
 \subtitle{A Multilingual Solution to Reduce Verbose Fields to Key Words}
 \institute[Cologne, York]{European Association of Archaeologists 2017}
@@ -42,40 +42,66 @@
 
 \begin{frame}[fragile]{}
 \begin{minipage}[t]{0.45\textwidth}
-What we \textbf{have}:\bigskip
+What we \textbf{have}:\medskip
 
 \begin{figure}
-\includegraphics[width=1.05\textwidth]{img/consp_ex.jpg}
+\includegraphics[width=1.0\textwidth]{img/consp_ex.jpg}
 \end{figure}
 \end{minipage}\hfill\pause
 \begin{minipage}[t]{0.45\textwidth}
-What we \textbf{want}:
-{\footnotesize
+What we \textbf{want}:\medskip
+{\scriptsize
 \begin{verbatim}
 {
    "form": "23.1",
    "origin": "Italy",
-   "decoration": "none"
+   "decoration": "none",
+   "occurs": "uncommon"
 },
 {
    "form": "23.2",
-   "origin": "Italy, not Padana"
+   "origin": "Italy, not Padana",
+   "occurs": "Mediterranean region;
+              North-Italy"
 }
 \end{verbatim}
 }
-\end{minipage}
-\end{frame}
+\end{minipage}\pause\medskip
 
-\begin{frame}\begin{center}
-\textbf{Problem:}
-Running texts contain \alert{a lot} of unnecessary information.
-
-Information scientists call them \textbf{redundancy}.
+\begin{minipage}[t]{0.45\textwidth}
+\begin{center}
+\alert{\textbf{UNSTRUCTURED DATA}}
 \end{center}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{center}
+\alert{\textbf{STRUCTURED DATA}}
+\end{center}
+\end{minipage}
+
 \end{frame}
 
+\begin{frame}
+\begin{tabbing}
+\qquad\textbf{Problem:} \= Running texts contain a lot of \alert{irrelevant information}.\\[.5em]
 
-\section{Text Mining}%\printSectionYes
+\> Information scientists call them \textbf{redundant}.
+\end{tabbing}
+\end{frame}
+
+{ % all template changes are local to this group.
+	\setbeamercolor{background canvas}{bg=black}
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \includegraphics[height=\paperheight]{img/death.jpg}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+\section{Text Mining: Theory}%\printSectionYes
 
 \begin{frame}{Classification}
 \textbf{Text Mining} is a \alert{general term} covering several different ideas.\pause
@@ -91,7 +117,10 @@ For instance:
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Information Extraction}
 
+
+\end{frame}
 
 \maketitle
 
