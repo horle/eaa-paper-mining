@@ -122,6 +122,25 @@ For instance:
 
 \end{frame}
 
+\begin{frame}{Relation Extraction}
+The most common approach is to look for certain \alert{relation triples} in the text.
+\end{frame}
+
+\section{Text Mining: Practical}
+
+\begin{frame}[fragile]{Stanford CoreNLP: Output}
+\begin{quote}
+Subform 20.1 is never common, but has a long history from the Augustan period until the late Tiberian or early Claudian period.
+\end{quote}
+results in
+\begin{verbatim}
+have history until: Subform 20.1, late tiberian
+have history until: Subform, tiberian
+have history until: Subform 20.1, tiberian
+have history until: Subform, late tiberian
+\end{verbatim}
+\end{frame}
+
 \maketitle
 
 \end{document}
