@@ -1,4 +1,4 @@
-\documentclass[xcolor=x11names, aspectratio=169]{beamer}
+\documentclass[xcolor=x11names, aspectratio=169,usenames,dvipsnames]{beamer}
 \usepackage[british]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -11,7 +11,7 @@
 \usepackage{verbatim}
 \usepackage{multirow}
 \usepackage{tabularx}
-\usetikzlibrary{matrix,backgrounds,patterns,arrows,decorations.markings,shapes}
+\usetikzlibrary{matrix,backgrounds,patterns,arrows,decorations.markings,shapes,positioning}
 \usepackage{caption}
 
 \usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
@@ -35,7 +35,7 @@
 \begin{center}
 \begin{figure}
 \includegraphics[width=.875\paperwidth]{img/consp.jpg}
-\caption{Sample from \emph{Conspectus} catalog.}
+\caption{Sample from \emph{Conspectus} catalogue.}
 \end{figure}
 \end{center}
 \end{frame}
@@ -116,12 +116,102 @@ What we \textbf{want}:\medskip
 \end{frame}
 
 \begin{frame}{Information Extraction}
-\textbf{Information extraction} (IE) is the task of automatically extracting structured information from unstructured [\dots] documents.
+\textbf{Information extraction} (IE) is the task of automatically extracting structured information from unstructured [\dots] documents.\pause\bigskip
 
+Information extraction is \textbf{\alert{really fucking hard}}.
+\end{frame}
+
+\begin{frame}{IE: Five Steps}
+\begin{enumerate}
+\item Tokenisation and Sentence splitting
+\item Lemmatisation
+\item Part-of-speech-tagging (POS)
+\item Named entity recognition (NER)
+\item Relation Extraction
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{POS-Tagging}
+\begin{figure}
+\tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
+\begin{tikzpicture}[node distance = .5em, font=\bfseries\large,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
+\node (a) at (0,0) {The};
+\node[right=of a,onslide={<2-> highlight}] (b) {quick};
+\node[right=of b,onslide={<2-> highlight}] (c) {brown};
+\node[right=of c,onslide={<2-> highlight}] (d) {fox};
+\node[right=of d] (e) {jump};
+\node[right=of e] (f) {over};
+\node[right=of f] (g) {the};
+\node[right=of g,onslide={<2-> highlight}] (h) {lazy};
+\node[right=of h,onslide={<2-> highlight}] (i) {dog};
+\node[right=of i] (j) {.};
+
+\node[block,fill=Fuchsia!30,below of=a] {DT};
+\node[block,fill=yellow!30,below of=b] {JJ};
+\node[block,fill=yellow!30,below of=c] {JJ};
+\node[block,fill=RoyalBlue!30,below of=d] {NN};
+\node[block,fill=green!30,below of=e] {VBD};
+\node[block,fill=orange!30,below of=f] {IN};
+\node[block,fill=Fuchsia!30,below of=g] {DT};
+\node[block,fill=yellow!30,below of=h] {JJ};
+\node[block,fill=RoyalBlue!30,below of=i] {NN};
+\node[block,fill=gray!30,below of=j] {.};
+
+\node at (0,-1.5) {};
+\node[above of=e,gray,node distance=1.3em,font=\mdseries] {\footnotesize jumps}; 
+\end{tikzpicture}
+\caption{POS-tagging examples after lemmatisation.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{POS-Tagging}
+\begin{figure}
+\tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
+\begin{tikzpicture}[node distance = .2em, font=\bfseries,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
+\node[onslide={<2> highlight}] (a) at (0,0) {Form};
+\node[right=of a,onslide={<2> highlight}] (b) {20};
+\node[right=of b] (c) {occur};
+\node[right=of c] (f) {from};
+\node[right=of f] (g) {the};
+\node[right=of g,onslide={<2> highlight}] (h) {Augustan};
+\node[right=of h] (i) {until};
+\node[right=of i] (j) {the};
+\node[right=of j,onslide={<2> highlight}] (k) {late};
+\node[right=of k,onslide={<2> highlight}] (l) {Tiberian};
+\node[right=of l,onslide={<2> highlight}] (m) {period};
+\node[right=of m] (n) {.};
+
+\node[block,fill=RoyalBlue!30,below of=a] {NN};
+\node[block,fill=Fuchsia!30,below of=b] {CD};
+\node[block,fill=green!30,below of=c] {VBZ};
+\node[block,fill=orange!30,below of=f] {IN};
+\node[block,fill=Fuchsia!30,below of=g] {DT};
+\node[block,fill=RoyalBlue!30,below of=h] {NNP};
+\node[block,fill=orange!30,below of=i] {IN};
+\node[block,fill=Fuchsia!30,below of=j] {DT};
+\node[block,fill=yellow!30,below of=k] {JJ};
+\node[block,fill=yellow!30,below of=l] {JJ};
+\node[block,fill=RoyalBlue!30,below of=m] {NN};
+\node[block,fill=gray!30,below of=n] {.};
+
+\node at (0,-1.5) {};
+\node[above of=c,gray,node distance=1.2em,font=\mdseries] {\footnotesize occurs};
+\end{tikzpicture}
+\caption{POS-tagging examples after lemmatisation.}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Relation Extraction}
-The most common approach is to look for certain \alert{relation triples} in the text.
+\begin{center}
+\begin{tabularx}{\textwidth}{CCC}
+\toprule
+\textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
+quick brown fox&jump over&lazy dog\\
+Form 20&occur&Augustan\\
+Form 20&occur&late Tiberian period\\
+\bottomrule
+\end{tabularx}
+\end{center}
 \end{frame}
 
 \section{Text Mining: Practical}
