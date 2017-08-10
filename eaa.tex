@@ -85,7 +85,9 @@ What we \textbf{want}:\medskip
 \begin{tabbing}
 \qquad\textbf{Problem:} \= Running texts contain a lot of \alert{irrelevant information}.\\[.5em]
 
-\> Information scientists call them \textbf{redundant}.
+\> Information scientists call them \textit{redundant}.\\[.5em]
+
+\> Redundancy makes database lookups \alert{\textbf{extremely inefficient}}.
 \end{tabbing}
 \end{frame}
 
@@ -104,7 +106,7 @@ What we \textbf{want}:\medskip
 \section{Text Mining: Theory}%\printSectionYes
 
 \begin{frame}{Classification}
-\textbf{Text Mining} is a \alert{general term} covering several different ideas, e.\,g.:\pause
+\large\textbf{Text Mining} is a \alert{general term} covering several different ideas, e.\,g.:\pause\normalsize
 
 \begin{itemize}[<+->]
 \item Information retrieval
@@ -116,12 +118,15 @@ What we \textbf{want}:\medskip
 \end{frame}
 
 \begin{frame}{Information Extraction}
-\textbf{Information extraction} (IE) is the task of automatically extracting structured information from unstructured [\dots] documents.\pause\bigskip
-
-Information extraction is \textbf{\alert{really fucking hard}}.
+\large{Some facts about Information Extraction (IE):}\normalsize
+\begin{itemize}
+\item \enquote{\textit{[IE] is the task of automatically extracting structured information from unstructured [\dots] documents.}}\pause
+\item Computer scientists have a hard time with IE (for over \alert{30 years} now!)\pause
+\item IE is \textbf{\alert{really super difficult}} and \alert{\textbf{often inaccurate}}.
+\end{itemize}
 \end{frame}
 
-\begin{frame}{IE: Five Steps}
+\begin{frame}{Five Steps}
 \begin{enumerate}
 \item Tokenisation and Sentence splitting
 \item Lemmatisation
