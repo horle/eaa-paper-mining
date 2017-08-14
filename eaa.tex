@@ -24,6 +24,7 @@
 
 \input{config.tex}
 \definecolor{morange}{HTML}{FF8200}
+\metroset{block=fill}
  
 \begin{document}
 
@@ -38,6 +39,14 @@
 \caption{Sample from \emph{Conspectus} catalogue.}
 \end{figure}
 \end{center}
+\end{frame}
+
+\begin{frame}{Oh dear!}
+\begin{block}{Problem}\vspace{.5em}
+Running texts contain a lot of \emph{irrelevant information} (for machine processing).
+
+This makes database lookups \alert{\textbf{extremely inefficient}}.
+\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{}
@@ -78,52 +87,52 @@ What we \textbf{want}:\medskip
 \alert{\textbf{STRUCTURED DATA}}
 \end{center}
 \end{minipage}
-
 \end{frame}
 
-\begin{frame}
-\begin{tabbing}
-\qquad\textbf{Problem:} \= Running texts contain a lot of \alert{irrelevant information}.\\[.5em]
-
-\> Information scientists call them \textit{redundant}.\\[.5em]
-
-\> Redundancy makes database lookups \alert{\textbf{extremely inefficient}}.
-\end{tabbing}
+\begin{frame}{Why underestimation is bad}
+\begin{center}
+\begin{figure}
+\includegraphics[width=\textwidth]{img/xkcd.png}
+\caption{I feel related. [Source: xkcd.com/1831]}
+\end{figure}
+\end{center}
 \end{frame}
-
-{ % all template changes are local to this group.
-	\setbeamercolor{background canvas}{bg=black}
-    \setbeamertemplate{navigation symbols}{}
-    \begin{frame}[plain]
-        \begin{tikzpicture}[remember picture,overlay]
-            \node[at=(current page.center)] {
-                \includegraphics[height=\paperheight]{img/death.jpg}
-            };
-        \end{tikzpicture}
-     \end{frame}
-}
 
 \section{Text Mining: Theory}%\printSectionYes
 
 \begin{frame}{Classification}
-\large\textbf{Text Mining} is a \alert{general term} covering several different ideas, e.\,g.:\pause\normalsize
-
+\begin{block}{Definition: Text Mining}\vspace{.5em}
+\textbf{Text Mining} is a \alert{general term} covering several different ideas\pause, e.\,g.:
 \begin{itemize}[<+->]
 \item Information retrieval
-\item Cluster analysis
-\item Statistical (lexical) analysis
+\item Statistical analysis
 \item \textbf{Information extraction}
 \item\dots
 \end{itemize}
+\end{block}
 \end{frame}
 
 \begin{frame}{Information Extraction}
-\large{Some facts about Information Extraction (IE):}\normalsize
+\begin{block}{Definition: Information Extraction (IE)}\vspace{.5em}
+\enquote{\textit{[IE] is the task of automatically extracting structured information from unstructured [\dots] documents.}}
+\end{block}\pause\bigskip
+
+\large{Some other facts about Information Extraction:}\normalsize
 \begin{itemize}
-\item \enquote{\textit{[IE] is the task of automatically extracting structured information from unstructured [\dots] documents.}}\pause
 \item Computer scientists have a hard time with IE (for over \alert{30 years} now!)\pause
 \item IE is \textbf{\alert{really super difficult}} and \alert{\textbf{often inaccurate}}.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Sorry!}
+\begin{large}
+\begin{alertblock}{\large DISCLAIMER}\vspace{.5em}
+We neither \emph{can} nor \emph{do} provide a perfect solution or perfect results.
+
+Furthermore, this project is still work in progress.
+\end{alertblock}
+
+\end{large}
 \end{frame}
 
 \begin{frame}{Five Steps}
@@ -221,17 +230,27 @@ Form 20&occur&late Tiberian period\\
 
 \section{Text Mining: Practical}
 
-\begin{frame}[fragile]{Stanford CoreNLP: Output}
-\begin{quote}
-Subform 20.1 is never common, but has a long history from the Augustan period until the late Tiberian or early Claudian period.
-\end{quote}
-results in
-\begin{verbatim}
-have history until: Subform 20.1, tiberian
-have history until: Subform 20.1, late tiberian
-have history until: Subform, tiberian
-have history until: Subform, late tiberian
-\end{verbatim}
+\begin{frame}{Tools}
+presenting different tools here
+\end{frame}
+
+\begin{frame}[fragile]{Adapting the NER}
+Stanford CoreNLP only recognises 8 entities types:
+
+\begin{center}\ttfamily
+\begin{tabular}{lll}
+PERSON&&DATE\\
+ORGANIZATION&&TIME\\
+LOCATION&&MONEY\\
+PERCENT&&MISC
+\end{tabular}
+\end{center}
+
+So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also necessary.
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{iepy} Active Learning Core}
+nuthin yet
 \end{frame}
 
 \section{Multilingualism}
