@@ -45,7 +45,7 @@
 \begin{block}{Problem}\vspace{.5em}
 Running texts contain a lot of \emph{irrelevant information} (for machine processing).
 
-This makes database lookups \alert{\textbf{extremely inefficient}}.
+This makes database lookups without keywords \alert{\textbf{extremely inefficient}}.
 \end{block}
 \end{frame}
 
@@ -251,6 +251,23 @@ So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also ne
 
 \begin{frame}[fragile]{\texttt{iepy} Active Learning Core}
 nuthin yet
+\end{frame}
+
+\begin{frame}{Temporal Expressions}
+With \textbf{\textsc{HeidelTime}} temporal expressions are mapped to TIMEX3 standard
+\begin{center}
+{\renewcommand{\arraystretch}{1.2}%
+\begin{tabular}{rcl}
+\texttt{around 140 B.\,C.}&$\longmapsto$&\texttt{APPROX BC0140}\\
+\texttt{second quarter first century B.\,C.}&$\longmapsto$&\texttt{XXXX-Q2 BC00}\\
+\texttt{first half third century A.\,D.}&$\longmapsto$&\texttt{XXXX-H1 02}\\
+\end{tabular}
+}
+\end{center}
+\pause
+\textbf{\textsc{HeidelTime}} supports many other languages, e.\,g.\ German, Italian, French, \dots
+
+HEIDELPLACE?!
 \end{frame}
 
 \section{Multilingualism}
