@@ -11,7 +11,7 @@
 \usepackage{verbatim}
 \usepackage{multirow}
 \usepackage{tabularx}
-\usetikzlibrary{matrix,backgrounds,patterns,arrows,decorations.markings,shapes,positioning}
+\usetikzlibrary{shadows,matrix,backgrounds,patterns,arrows,decorations.markings,shapes,positioning,calc,chains,scopes,fit}
 \usepackage{caption}
 
 \usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
@@ -230,8 +230,91 @@ Form 20&occur&late Tiberian period\\
 
 \section{Text Mining: Practical}
 
-\begin{frame}{Tools}
-presenting different tools here
+\begin{frame}{IE Process Pipeline with UIMA}
+\tikzset{%
+  materia/.style={draw, text centered, minimum height=1.8em, minimum width=5em, font=\footnotesize},
+  etape/.style={materia, fill=blue!20, rounded corners},
+  doc/.style={materia, fill=green!20,shape=document, text width=6em, inner ysep=5pt},
+  lab/.style={anchor=base,text width=5em,font=\itshape\scriptsize},
+  back group/.style={fill=yellow!20,rounded corners, draw=black!50, thick,dashed, inner ysep=5pt,minimum height=2cm},
+  imp/.style={etape}
+}
+\tikzstyle{myarrows}=[-stealth',line width=.8mm]
+\tikzstyle{doublea}=[stealth'-stealth',line width=.3mm]
+
+\tikzset{%
+  cascaded/.style = {%
+    general shadow = {%
+      etape,
+      shadow scale = 1,
+      shadow xshift = .8ex,
+      shadow yshift = .8ex,
+      draw},
+    general shadow = {%
+      etape,
+      shadow scale = 1,
+      shadow xshift = .4ex,
+      shadow yshift = .4ex,
+      draw},
+    draw}}
+    
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,foreground,main}
+ 
+\begin{figure}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[node distance=1.5em and 3em, align=center]
+\node[etape] (token) {Stanford};
+\node[etape, right=of token] (lemma) {ClearNLP};
+\node[etape, right=of lemma] (pos) {OpenNLP};
+\node[etape, right=of pos] (ner) {CoreNLP};
+\node[etape, right=of ner] (ie) {UIMA Ruta};
+
+\node[above=of token,lab] (t) {Tokenisation};
+\node[above=of lemma,lab] (l) {Lemmatisation};
+\node[above=of pos,lab] (p) {POS-Tagging};
+\node[above=of ner,lab] (n) {NER};
+\node[above=of ie,lab] (i) {Information Extraction};
+
+\begin{pgfonlayer}{foreground}
+\node[back group] (start) [fit=(token) (t)]{};
+\node[back group] (1) [fit=(lemma) (l)]{};
+\node[back group] (2) [fit=(pos) (p)]{};
+\node[back group] (3) [fit=(ner) (n)]{};
+\node[back group] (end) [fit=(ie) (i)]{};
+\end{pgfonlayer}
+
+\node[doc, above=3.5em of start] (doc) {unstructured document};
+\node[doc, above=3.5em of end,node distance=2em] (struc) {structured data};
+
+\node[etape, cascaded, below=3em of token] (st) {PosMapper};
+\node[etape, cascaded, below=3em of lemma] (sl) {CoreNLP};
+\node[etape, cascaded, below=3em of pos] (sp) {MatePos};
+\node[etape, cascaded, below=3em of ner] (sn) {OpenNLP};
+\node[etape, cascaded, below=3em of ie] (si) {CoreNLP};
+
+\draw[doublea] (token) edge (st);
+\draw[doublea] (lemma) edge (sl);
+\draw[doublea] (ner) edge (sn);
+\draw[doublea] (pos) edge (sp);
+\draw[doublea] (ie) edge (si);
+
+\node[lab,above=0.4em of 3,xshift=-1.6em,align=right,font=\upshape\footnotesize,text width=9em](uima) {UIMA implementation};
+
+\begin{pgfonlayer}{background}
+\node[back group, fill=orange!30] [fit=(uima) (start) (1) (2) (3)] {};
+\end{pgfonlayer}
+
+\draw[myarrows] (doc) edge (start) (start) edge (1) (1) edge (2) (2) edge (3) (3) edge (end) (end) edge (struc);
+\end{tikzpicture}
+}
+\caption{IE Process Pipeline.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Two approaches for NER}
+here rule-based approach and machine learning
 \end{frame}
 
 \begin{frame}[fragile]{Adapting the NER}
@@ -247,10 +330,6 @@ PERCENT&&MISC
 \end{center}
 
 So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also necessary.
-\end{frame}
-
-\begin{frame}[fragile]{\texttt{iepy} Active Learning Core}
-nuthin yet
 \end{frame}
 
 \begin{frame}{Temporal Expressions}
