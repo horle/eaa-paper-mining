@@ -16,10 +16,10 @@
 
 \usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
 
-\author[F.\ Kußmaul \&\ T.\ Evans]{{\Large Felix Kußmaul}\hfill\raisebox{-.9em}{\includegraphics[width=4cm]{img/uco.jpg}}\\[1.2em]{\Large Dr Tim Evans}\hfill\raisebox{-.7em}{\includegraphics[width=4cm]{img/york.jpg}}}
+\author[T.\ Evans \&\ F.\ Kußmaul]{{\Large Dr Tim Evans}\hfill\raisebox{-.9em}{\includegraphics[width=4cm]{img/york.jpg}}\\[1.2em]{\Large Felix Kußmaul}\hfill\raisebox{-.7em}{\includegraphics[width=4cm]{img/uco.jpg}}}
 \title[Mining Paper Catalogues]{\Large Mining Paper Catalogues}
 \subtitle{\normalsize A Multilingual Solution to Reduce Verbose Fields to Consistent Terminology}
-\institute[Cologne, York]{EAA Maastricht 2017}
+\institute[York, Cologne]{EAA Maastricht 2017}
 \date[31 August 2017]{\ \\[.5em]31 August 2017}
 
 \input{config.tex}
@@ -89,7 +89,7 @@ What we \textbf{want}:\medskip
 \end{minipage}
 \end{frame}
 
-\section{Text Mining: Theory}%\printSectionYes
+\section{Text Mining}%\printSectionYes
 
 \begin{frame}{Classification}
 \begin{block}{Definition: Text Mining}\vspace{.5em}
@@ -101,15 +101,6 @@ What we \textbf{want}:\medskip
 \item\dots
 \end{itemize}
 \end{block}
-\end{frame}
-
-\begin{frame}{Why underestimation is bad}
-\begin{center}
-\begin{figure}
-\includegraphics[width=\textwidth]{img/xkcd.png}
-\caption{I can relate to this. [Source: xkcd.com/1831]}
-\end{figure}
-\end{center}
 \end{frame}
 
 \begin{frame}{Information Extraction}
@@ -124,119 +115,30 @@ What we \textbf{want}:\medskip
 \end{itemize}
 \end{frame}
 
+%\begin{frame}{Why underestimation is bad}
+%\begin{center}
+%\begin{figure}
+%\includegraphics[width=\textwidth]{img/xkcd.png}
+%\caption{I can relate to this. [Source: xkcd.com/1831]}
+%\end{figure}
+%\end{center}
+%\end{frame}
+
 \begin{frame}{Sorry!}
 \begin{large}
 \begin{alertblock}{\large DISCLAIMER}\vspace{.5em}
-We neither \emph{can} nor \emph{do} provide a perfect solution or perfect results.
-
-Furthermore, this project is still work in progress.
+In this presentation, we show \textbf{preliminary} results, as this project is still work in progress.
 \end{alertblock}
-
 \end{large}
 \end{frame}
-
-\begin{frame}{Five Steps}
-\begin{enumerate}
-\item Tokenisation and Sentence splitting
-\item Lemmatisation
-\item Part-of-speech-tagging (POS)
-\item Named entity recognition (NER)
-\item Relation Extraction
-\end{enumerate}
-\end{frame}
-
-\begin{frame}{POS-Tagging}
-\begin{figure}
-\tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
-\begin{tikzpicture}[node distance = .5em, font=\bfseries\large,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
-\node (a) at (0,0) {The};
-\node[right=of a,onslide={<2-> highlight}] (b) {quick};
-\node[right=of b,onslide={<2-> highlight}] (c) {brown};
-\node[right=of c,onslide={<2-> highlight}] (d) {fox};
-\node[right=of d] (e) {jump};
-\node[right=of e] (f) {over};
-\node[right=of f] (g) {the};
-\node[right=of g,onslide={<2-> highlight}] (h) {lazy};
-\node[right=of h,onslide={<2-> highlight}] (i) {dog};
-\node[right=of i] (j) {.};
-
-\node[block,fill=Fuchsia!30,below of=a] {DT};
-\node[block,fill=yellow!30,below of=b] {JJ};
-\node[block,fill=yellow!30,below of=c] {JJ};
-\node[block,fill=RoyalBlue!30,below of=d] {NN};
-\node[block,fill=green!30,below of=e] {VBD};
-\node[block,fill=orange!30,below of=f] {IN};
-\node[block,fill=Fuchsia!30,below of=g] {DT};
-\node[block,fill=yellow!30,below of=h] {JJ};
-\node[block,fill=RoyalBlue!30,below of=i] {NN};
-\node[block,fill=gray!30,below of=j] {.};
-
-\node at (0,-1.5) {};
-\node[above of=e,gray,node distance=1.3em,font=\mdseries] {\footnotesize jumps}; 
-\end{tikzpicture}
-\caption{POS-tagging examples after lemmatisation.}
-\end{figure}
-\end{frame}
-
-\begin{frame}{POS-Tagging}
-\begin{figure}
-\tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
-\begin{tikzpicture}[node distance = .2em, font=\bfseries,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
-\node[onslide={<2> highlight}] (a) at (0,0) {Form};
-\node[right=of a,onslide={<2> highlight}] (b) {20};
-\node[right=of b] (c) {occur};
-\node[right=of c] (f) {from};
-\node[right=of f] (g) {the};
-\node[right=of g,onslide={<2> highlight}] (h) {Augustan};
-\node[right=of h] (i) {until};
-\node[right=of i] (j) {the};
-\node[right=of j,onslide={<2> highlight}] (k) {late};
-\node[right=of k,onslide={<2> highlight}] (l) {Tiberian};
-\node[right=of l,onslide={<2> highlight}] (m) {period};
-\node[right=of m] (n) {.};
-
-\node[block,fill=RoyalBlue!30,below of=a] {NN};
-\node[block,fill=Fuchsia!30,below of=b] {CD};
-\node[block,fill=green!30,below of=c] {VBZ};
-\node[block,fill=orange!30,below of=f] {IN};
-\node[block,fill=Fuchsia!30,below of=g] {DT};
-\node[block,fill=RoyalBlue!30,below of=h] {NNP};
-\node[block,fill=orange!30,below of=i] {IN};
-\node[block,fill=Fuchsia!30,below of=j] {DT};
-\node[block,fill=yellow!30,below of=k] {JJ};
-\node[block,fill=yellow!30,below of=l] {JJ};
-\node[block,fill=RoyalBlue!30,below of=m] {NN};
-\node[block,fill=gray!30,below of=n] {.};
-
-\node at (0,-1.5) {};
-\node[above of=c,gray,node distance=1.2em,font=\mdseries] {\footnotesize occurs};
-\end{tikzpicture}
-\caption{POS-tagging examples after lemmatisation.}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Relation Extraction}
-\begin{center}
-\begin{tabularx}{\textwidth}{CCC}
-\toprule
-\textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
-quick brown fox&jump over&lazy dog\\
-Form 20&occur&Augustan\\
-Form 20&occur&late Tiberian period\\
-\bottomrule
-\end{tabularx}
-\end{center}
-\end{frame}
-
-\section{Text Mining: Practical}
 
 \begin{frame}{IE Process Pipeline with UIMA}
 \tikzset{%
   materia/.style={draw, text centered, minimum height=1.8em, minimum width=5em, font=\footnotesize},
   etape/.style={materia, fill=blue!20, rounded corners},
   doc/.style={materia, fill=green!20,shape=document, text width=6em, inner ysep=5pt},
-  lab/.style={anchor=base,text width=5em,font=\itshape\scriptsize},
-  back group/.style={fill=yellow!20,rounded corners, draw=black!50, thick,dashed, inner ysep=5pt,minimum height=2cm},
+  lab/.style={anchor=base,text width=5em,font=\bfseries\itshape\scriptsize},
+  back group/.style={fill=yellow!20,rounded corners, draw=black!50, thick, inner ysep=5pt,minimum height=2cm},
   imp/.style={etape}
 }
 \tikzstyle{myarrows}=[-stealth',line width=.8mm]
@@ -303,7 +205,7 @@ Form 20&occur&late Tiberian period\\
 \node[lab,above=0.4em of 3,xshift=-1.6em,align=right,font=\upshape\footnotesize,text width=9em](uima) {UIMA implementation};
 
 \begin{pgfonlayer}{background}
-\node[back group, fill=orange!30] [fit=(uima) (start) (1) (2) (3)] {};
+\node[dashed,back group, fill=orange!20] [fit=(uima) (start) (1) (2) (3)] {};
 \end{pgfonlayer}
 
 \draw[myarrows] (doc) edge (start) (start) edge (1) (1) edge (2) (2) edge (3) (3) edge (end) (end) edge (struc);
@@ -313,15 +215,81 @@ Form 20&occur&late Tiberian period\\
 \end{figure}
 \end{frame}
 
+\begin{frame}{POS-Tagging}
+\begin{figure}
+\tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
+\begin{tikzpicture}[node distance = .5em, font=\bfseries\large,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
+\node (a) at (0,0) {The};
+\node[right=of a,onslide={<2-> highlight}] (b) {quick};
+\node[right=of b,onslide={<2-> highlight}] (c) {brown};
+\node[right=of c,onslide={<2-> highlight}] (d) {fox};
+\node[right=of d] (e) {jump};
+\node[right=of e] (f) {over};
+\node[right=of f] (g) {the};
+\node[right=of g,onslide={<2-> highlight}] (h) {lazy};
+\node[right=of h,onslide={<2-> highlight}] (i) {dog};
+\node[right=of i] (j) {.};
+
+\node[block,fill=Fuchsia!30,below of=a] {DT};
+\node[block,fill=yellow!30,below of=b] {JJ};
+\node[block,fill=yellow!30,below of=c] {JJ};
+\node[block,fill=RoyalBlue!30,below of=d] {NN};
+\node[block,fill=green!30,below of=e] {VBD};
+\node[block,fill=orange!30,below of=f] {IN};
+\node[block,fill=Fuchsia!30,below of=g] {DT};
+\node[block,fill=yellow!30,below of=h] {JJ};
+\node[block,fill=RoyalBlue!30,below of=i] {NN};
+\node[block,fill=gray!30,below of=j] {.};
+
+\node at (0,-1.5) {};
+\node[above of=e,gray,node distance=1.3em,font=\mdseries] {\footnotesize jumps}; 
+\end{tikzpicture}
+\caption{POS-tagging examples after lemmatisation.}
+\end{figure}
+\end{frame}
+
 \begin{frame}{Two approaches for NER}
-here rule-based approach and machine learning
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Rule-based approach}
+\begin{itemize}
+\item High precision, but lower recall
+
+$\Rightarrow$ \alert{Many many rules?!}
+\end{itemize}
+\visible<2->{
+\begin{figure}
+\includegraphics[width=.9\textwidth]{img/eleph.jpg}
+\end{figure}}
+\end{minipage}\pause\pause\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Machine-learning approach}
+\begin{itemize}
+\item Needs to be trained!
+\item Lower precision, but high recall
+\end{itemize}
+\visible<4>{
+MISSING FIGURE
+%\includegraphics[width=\pagewidth]{}
+}
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Relation Extraction}
+\begin{center}
+\begin{tabularx}{\textwidth}{CCC}
+\toprule
+\textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
+quick brown fox&jump over&lazy dog\\
+\bottomrule
+\end{tabularx}
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Adapting the NER}
 Stanford CoreNLP only recognises 8 entities types:
 
 \begin{center}\ttfamily
-\begin{tabular}{lll}
+\begin{tabular}{lp{3em}l}
 PERSON&&DATE\\
 ORGANIZATION&&TIME\\
 LOCATION&&MONEY\\
@@ -333,7 +301,7 @@ So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also ne
 \end{frame}
 
 \begin{frame}{Temporal Expressions}
-With \textbf{\textsc{HeidelTime}} temporal expressions are mapped to TIMEX3 standard
+With \textbf{\textit{\textsc{HeidelTime}}} temporal expressions are mapped to TIMEX3 standard
 \begin{center}
 {\renewcommand{\arraystretch}{1.2}%
 \begin{tabular}{rcl}
@@ -348,6 +316,7 @@ With \textbf{\textsc{HeidelTime}} temporal expressions are mapped to TIMEX3 stan
 
 HEIDELPLACE?!
 \end{frame}
+
 
 \section{Multilingualism}
 
@@ -392,6 +361,12 @@ Creation of a neutral spine based on the Getty Institute's Art and Architecture 
 more bla\newline
 more bla\newline
 more bla\newline
+\end{frame}
+
+\begin{frame}{Preliminary results: felix}
+challenges:
+
+choice of tools, coreferences in text, eloquence of archaeologists, maybe calculating F-value?
 \end{frame}
 
 \maketitle
