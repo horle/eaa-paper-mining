@@ -16,19 +16,27 @@
 
 \usetheme[titleformat title=regular,titleformat frame=regular,titleformat section=allcaps,numbering=fraction]{metropolis}
 
-\author[T.\ Evans \&\ F.\ Kußmaul]{{\Large Dr Tim Evans}\hfill\raisebox{-.9em}{\includegraphics[width=4cm]{img/york.jpg}}\\[1.2em]{\Large Felix Kußmaul}\hfill\raisebox{-.7em}{\includegraphics[width=4cm]{img/uco.jpg}}}
+\author[T.\ Evans \&\ F.\ Kußmaul]{\large Tim Evans\inst{1}, \and Felix Kußmaul\inst{2}}
 \title[Mining Paper Catalogues]{\Large Mining Paper Catalogues}
 \subtitle{\normalsize A Multilingual Solution to Reduce Verbose Fields to Consistent Terminology}
-\institute[York, Cologne]{EAA Maastricht 2017}
-\date[31 August 2017]{\ \\[.5em]31 August 2017}
+\institute[York, Cologne]{\inst{1} Archaeology Data Service, University of York \and \inst{2} Archaeological Institute, University of Cologne}
+\date[31 August 2017]{\vspace*{1em}23rd Annual Meeting EAA, Maastricht\\[.5em] 31 August 2017\vspace*{1em}}
 
+\titlegraphic{
+    \tikz[overlay,remember picture]
+        \node[xshift=-3em,yshift=3em,at=(current page.south east), anchor=south east] {
+            \includegraphics[width=0.25\textwidth]{../archaide+acronimo-colore.eps}
+        };
+}
 \input{config.tex}
 \definecolor{morange}{HTML}{FF8200}
 \metroset{block=fill}
  
 \begin{document}
 
-\maketitle
+\begin{frame}[plain]
+\titlepage
+\end{frame}
 
 \section{Motivation}
 
@@ -36,7 +44,7 @@
 \begin{center}
 \begin{figure}
 \includegraphics[width=.875\paperwidth]{img/consp.jpg}
-\caption{Sample from \emph{Conspectus} catalogue.}
+\caption{Sample from \cite{consp}.}
 \end{figure}
 \end{center}
 \end{frame}
@@ -104,13 +112,13 @@ What we \textbf{want}:\medskip
 \end{frame}
 
 \begin{frame}{Information Extraction}
-\begin{block}{Definition: Information Extraction (IE)}\vspace{.5em}
-\enquote{\textit{[IE] is the task of automatically extracting structured information from unstructured [\dots] documents.}}
+\begin{block}{Definition: Information Extraction (IE)}\vspace{.5em}{
+\enquote{\textit{[\textbf{IE} refers to] the \textbf{identification} and extraction of instances of a particular class of events or relationships in a \textbf{natural language text} and their \textbf{transformation} into a structured representation.}} \hfill -- Grishman 1997, Eikvil 1999}
 \end{block}\pause\bigskip
 
 \large{Some other facts about Information Extraction:}\normalsize
-\begin{itemize}
-\item Computer scientists have a hard time with IE (for over \alert{30 years} now!)\pause
+\begin{itemize}[<+->]
+\item Computer scientists have a hard time with IE (for over \alert{30 years} now!)
 \item IE is \textbf{\alert{really super difficult}} and \alert{\textbf{often inaccurate}}.
 \end{itemize}
 \end{frame}
@@ -248,43 +256,6 @@ In this presentation, we show \textbf{preliminary} results, as this project is s
 \end{figure}
 \end{frame}
 
-\begin{frame}{Two approaches for NER}
-\begin{minipage}[t]{0.45\textwidth}
-\textbf{Rule-based approach}
-\begin{itemize}
-\item High precision, but lower recall
-
-$\Rightarrow$ \alert{Many many rules?!}
-\end{itemize}
-\visible<2->{
-\begin{figure}
-\includegraphics[width=.9\textwidth]{img/eleph.jpg}
-\end{figure}}
-\end{minipage}\pause\pause\hfill
-\begin{minipage}[t]{0.45\textwidth}
-\textbf{Machine-learning approach}
-\begin{itemize}
-\item Needs to be trained!
-\item Lower precision, but high recall
-\end{itemize}
-\visible<4>{
-MISSING FIGURE
-%\includegraphics[width=\pagewidth]{}
-}
-\end{minipage}
-\end{frame}
-
-\begin{frame}{Relation Extraction}
-\begin{center}
-\begin{tabularx}{\textwidth}{CCC}
-\toprule
-\textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
-quick brown fox&jump over&lazy dog\\
-\bottomrule
-\end{tabularx}
-\end{center}
-\end{frame}
-
 \begin{frame}[fragile]{Adapting the NER}
 Stanford CoreNLP only recognises 8 entities types:
 
@@ -300,12 +271,42 @@ PERCENT&&MISC
 So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also necessary.
 \end{frame}
 
+\begin{frame}{Two approaches for NER}
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Rule-based approach}
+\begin{itemize}
+\item High precision, but lower recall
+
+$\Rightarrow$ \alert{Many many rules?!}
+\end{itemize}
+\visible<2->{
+\begin{figure}
+\includegraphics[width=\textwidth]{img/eleph.jpg}
+\caption{Excerpt from \cite{eleph}.}
+\end{figure}}
+\end{minipage}\pause\pause\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Machine-learning approach}
+\begin{itemize}
+\item Lower precision, but high recall
+\item \alert{Needs to be trained!}
+\end{itemize}\vspace*{-1em}
+\visible<4>{
+\begin{figure}
+\hspace*{-1.5em}\includegraphics[width=1.1\textwidth]{img/iepy.png}
+\caption{Manually annotated sentence from \cite{consp} in \texttt{iepy}.}
+\end{figure}
+}
+\end{minipage}
+\end{frame}
+
 \begin{frame}{Temporal Expressions}
 With \textbf{\textit{\textsc{HeidelTime}}} temporal expressions are mapped to TIMEX3 standard
 \begin{center}
 {\renewcommand{\arraystretch}{1.2}%
 \begin{tabular}{rcl}
 \texttt{around 140 B.\,C.}&$\longmapsto$&\texttt{APPROX BC0140}\\
+\texttt{Spätes 3.–4.\ Jh.\ n.\,Chr.}&$\longmapsto$&\texttt{END 02};~~ \texttt{03}\\
 \texttt{second quarter first century B.\,C.}&$\longmapsto$&\texttt{XXXX-Q2 BC00}\\
 \texttt{first half third century A.\,D.}&$\longmapsto$&\texttt{XXXX-H1 02}\\
 \end{tabular}
@@ -317,6 +318,17 @@ With \textbf{\textit{\textsc{HeidelTime}}} temporal expressions are mapped to TI
 HEIDELPLACE?!
 \end{frame}
 
+\begin{frame}{Relation Extraction}
+\begin{center}
+\begin{tabularx}{\textwidth}{CCC}
+\toprule
+\textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
+quick brown fox&jump over&lazy dog\\
+K 612&dates&\texttt{03} (4th century A.\,D.)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{frame}
 
 \section{Multilingualism}
 
@@ -363,10 +375,42 @@ more bla\newline
 more bla\newline
 \end{frame}
 
-\begin{frame}{Preliminary results: felix}
+\section{Outlook}
+
+\begin{frame}{Challenges to meet}
 challenges:
 
 choice of tools, coreferences in text, eloquence of archaeologists, maybe calculating F-value?
+
+\textsc{HeidelTime}:\vspace{-1em}
+\begin{center}
+second and \textbf{third quarter} of the \textbf{first century A.\,D.}\quad$\longmapsto$\quad\texttt{XXXX-Q3};~~\texttt{00}
+\end{center}
+\end{frame}
+
+\begin{frame}{References}
+
+\printbibliography[heading=none]
+\end{frame}
+
+
+\begin{frame}[plain]
+\vfill\vfill\vfill
+\begin{center}\Large
+Thank you very much for your attention!\\\bigskip
+
+Questions?
+\end{center}\vfill\vfill
+
+\hfill
+\begin{minipage}{0.7\textwidth}\scriptsize
+\begin{flushright}
+This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement \textnumero\ 693548
+\end{flushright}
+\end{minipage}\hspace*{1em}
+\begin{minipage}{0.1\textwidth}
+\includegraphics[width=\textwidth]{img/eu_flag.ps}
+\end{minipage}
 \end{frame}
 
 \maketitle

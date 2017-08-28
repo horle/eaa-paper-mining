@@ -1,3 +1,5 @@
+\usepackage{pdfrender}
+
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\orange}[1]{\textcolor{orange}{#1}}
 \newcommand{\green}[1]{\textcolor{markgreen}{#1}}
@@ -9,7 +11,7 @@
 \newcolumntype{L}{>{\centering\raggedright\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 
-\usepackage[style=archaeologie,width=2cm,edby,backend=biber]{biblatex}
+\usepackage[style=authortitle-comp,backend=biber]{biblatex}
 \addbibresource{eaa.bib}
 \renewcommand*{\bibfont}{\small}
 
@@ -121,3 +123,40 @@
 }
 }
 \makeatother
+
+
+%\setbeamertemplate{title page}{%
+%\begin{tikzpicture}[remember picture,overlay]
+%\fill[orange]
+%  ([yshift=15pt]current page.west) rectangle (current page.south east);
+%\node[anchor=east] 
+%  at ([yshift=-50pt]current page.north east) (author)
+%  {\parbox[t]{.6\paperwidth}{\raggedleft%
+%    \usebeamerfont{author}\textcolor{orange}{%
+%    \textpdfrender{
+%    TextRenderingMode=FillStroke,
+%    FillColor=orange,
+%    LineWidth=.1ex,
+%    }{\insertauthor}}}};
+%\node[anchor=north east] 
+%  at ([yshift=-70pt]current page.north east) (institute)
+%  {\parbox[t]{.78\paperwidth}{\raggedleft%
+%    \usebeamerfont{institute}\textcolor{gray}{\insertinstitute}}};
+%\node[anchor=south west] 
+%  at ([yshift=20pt]current page.west) (logo)
+%  {\parbox[t]{.19\paperwidth}{\raggedleft%
+%    \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+%\node[anchor=east]
+%  at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
+%  {\parbox[t]{\textwidth}{\raggedleft%
+% \usebeamerfont{author}\textcolor{white}{%
+%    \textpdfrender{
+%    TextRenderingMode=FillStroke,
+%    FillColor=white,
+%    LineWidth=.1ex,
+%    }{\inserttitle}}}};
+%\node[anchor=east]
+%  at ([yshift=-60pt,xshift=-20pt]current page.east) (subtitle)
+%  {\parbox[t]{.6\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
+%\end{tikzpicture}
+%}
