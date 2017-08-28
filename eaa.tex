@@ -24,8 +24,8 @@
 
 \titlegraphic{
     \tikz[overlay,remember picture]
-        \node[xshift=-3em,yshift=3em,at=(current page.south east), anchor=south east] {
-            \includegraphics[width=0.25\textwidth]{../archaide+acronimo-colore.eps}
+        \node[xshift=-5em,yshift=3em,at=(current page.south east), anchor=south east] {
+            \includegraphics[width=0.25\textwidth]{img/archaide.eps}
         };
 }
 \input{config.tex}
@@ -256,11 +256,11 @@ In this presentation, we show \textbf{preliminary} results, as this project is s
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Adapting the NER}
-Stanford CoreNLP only recognises 8 entities types:
+\begin{frame}[fragile]{Adapting the NER}\large
+Most NERs (e.\,g.\ \textbf{Stanford CoreNLP}) only recognise 8 entities types:
 
 \begin{center}\ttfamily
-\begin{tabular}{lp{3em}l}
+\begin{tabular}{lp{4em}l}
 PERSON&&DATE\\
 ORGANIZATION&&TIME\\
 LOCATION&&MONEY\\
@@ -268,7 +268,7 @@ PERCENT&&MISC
 \end{tabular}
 \end{center}
 
-So we have to add the custom type \texttt{FORM}. Adjusting \texttt{DATE} also necessary.
+So we have to add the \alert{custom entity type \texttt{FORM}}.
 \end{frame}
 
 \begin{frame}{Two approaches for NER}
@@ -290,10 +290,10 @@ $\Rightarrow$ \alert{Many many rules?!}
 \begin{itemize}
 \item Lower precision, but high recall
 \item \alert{Needs to be trained!}
-\end{itemize}\vspace*{-1em}
+\end{itemize}%\vspace*{-1em}
 \visible<4>{
 \begin{figure}
-\hspace*{-1.5em}\includegraphics[width=1.1\textwidth]{img/iepy.png}
+\hspace*{-1em}\includegraphics[width=1.05\textwidth]{img/iepy.png}
 \caption{Manually annotated sentence from \cite{consp} in \texttt{iepy}.}
 \end{figure}
 }
@@ -312,22 +312,43 @@ With \textbf{\textit{\textsc{HeidelTime}}} temporal expressions are mapped to TI
 \end{tabular}
 }
 \end{center}
-\pause
-\textbf{\textsc{HeidelTime}} supports many other languages, e.\,g.\ German, Italian, French, \dots
 
-HEIDELPLACE?!
+\textbf{\textsc{HeidelTime}} supports many other languages, e.\,g.\ German, Italian, French, \dots
 \end{frame}
 
-\begin{frame}{Relation Extraction}
+\begin{frame}[fragile]{Relation Extraction}
 \begin{center}
 \begin{tabularx}{\textwidth}{CCC}
 \toprule
 \textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
 quick brown fox&jump over&lazy dog\\
-K 612&dates&\texttt{03} (4th century A.\,D.)\\
+K 612&dates&\texttt{03}\footnote{\enquote{4th century A.\,D.}}\\
+Form 23&dates&\texttt{XXXX-Q2 00}\footnote{\enquote{second and third quarters of the first century A.\,D.}}\\
+Subform 23.2&dates&\texttt{XXXX-Q2 00}~~\\
 \bottomrule
-\end{tabularx}
+\end{tabularx}\bigskip\pause
+
+\begin{minipage}{0.3\textwidth}\flushright
+\textbf{$\boldsymbol{\Rightarrow}$ e.\,g.}
+\end{minipage}\hfill
+\begin{minipage}{0.65\textwidth}
+{
+\begin{verbatim}
+{  "form":   "23.2",
+   "dating": "XXXX-Q2 00"  }
+\end{verbatim}
+}
+\end{minipage}
 \end{center}
+\end{frame}
+
+%NOTE: supports Pleiades and GeoNames
+
+\begin{frame}{Locations with \textsc{HeidelPlace}}
+\begin{figure}
+\hspace*{-1em}\includegraphics[width=1.025\textwidth]{img/heidelplace.png}
+\caption{Screenshot of \textsc{HeidelPlace}.}
+\end{figure}
 \end{frame}
 
 \section{Multilingualism}
