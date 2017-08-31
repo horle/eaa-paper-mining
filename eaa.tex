@@ -38,8 +38,6 @@
 \titlepage
 \end{frame}
 
-\section{Motivation}
-
 \begin{frame}{Data Source}
 \begin{center}
 \begin{figure}
@@ -97,30 +95,28 @@ What we \textbf{want}:\medskip
 \end{minipage}
 \end{frame}
 
-\section{Text Mining}%\printSectionYes
-
-\begin{frame}{Classification}
-\begin{block}{Definition: Text Mining}\vspace{.5em}
-\textbf{Text Mining} is a \alert{general term} covering several different ideas\pause, e.\,g.:
-\begin{itemize}[<+->]
-\item Information retrieval
-\item Statistical analysis
-\item \textbf{Information extraction}
-\item\dots
-\end{itemize}
-\end{block}
-\end{frame}
+%\begin{frame}{Classification}
+%\begin{block}{Definition: Text Mining}\vspace{.5em}
+%\textbf{Text Mining} is a \alert{general term} covering several different ideas\pause, e.\,g.:
+%\begin{itemize}[<+->]
+%\item Statistical analysis
+%\item Information retrieval
+%\item \textbf{Information extraction}
+%\item\dots
+%\end{itemize}
+%\end{block}
+%\end{frame}
 
 \begin{frame}{Information Extraction}
 \begin{block}{Definition: Information Extraction (IE)}\vspace{.5em}{
 \enquote{\textit{[\textbf{IE} refers to] the \textbf{identification} and extraction of instances of a particular class of events or relationships in a \textbf{natural language text} and their \textbf{transformation} into a structured representation.}} \hfill -- Grishman 1997, Eikvil 1999}
-\end{block}\pause\bigskip
+\end{block}%\pause\bigskip
 
-\large{Some other facts about Information Extraction:}\normalsize
-\begin{itemize}[<+->]
-\item Computer scientists have a hard time with IE (for over \alert{30 years} now!)
-\item IE is \textbf{\alert{really super difficult}} and \alert{\textbf{often inaccurate}}.
-\end{itemize}
+%\large{Some other facts about IE:}\normalsize
+%\begin{itemize}[<+->]
+%\item Computer scientists have a hard time with it (for over \alert{30 years} now!)
+%\item IE is \textbf{\alert{really super difficult}} and \alert{\textbf{often inaccurate}}.
+%\end{itemize}
 \end{frame}
 
 %\begin{frame}{Why underestimation is bad}
@@ -132,15 +128,15 @@ What we \textbf{want}:\medskip
 %\end{center}
 %\end{frame}
 
-\begin{frame}{Sorry!}
-\begin{large}
-\begin{alertblock}{\large DISCLAIMER}\vspace{.5em}
-In this presentation, we show \textbf{preliminary} results, as this project is still work in progress.
-\end{alertblock}
-\end{large}
-\end{frame}
+%\begin{frame}{Sorry!}
+%\begin{large}
+%\begin{alertblock}{\large DISCLAIMER}\vspace{.5em}
+%In this presentation, we show \textbf{preliminary} results, as this project is still work in progress.
+%\end{alertblock}
+%\end{large}
+%\end{frame}
 
-\begin{frame}{IE Process Pipeline with UIMA}
+\begin{frame}{IE Process Pipeline}
 \tikzset{%
   materia/.style={draw, text centered, minimum height=1.8em, minimum width=5em, font=\footnotesize},
   etape/.style={materia, fill=blue!20, rounded corners},
@@ -210,20 +206,20 @@ In this presentation, we show \textbf{preliminary} results, as this project is s
 \draw[doublea] (pos) edge (sp);
 \draw[doublea] (ie) edge (si);
 
-\node[lab,above=0.4em of 3,xshift=-1.6em,align=right,font=\upshape\footnotesize,text width=9em](uima) {UIMA implementation};
+%\node[lab,above=0.4em of 3,xshift=-1.6em,align=right,font=\upshape\footnotesize,text width=9em](uima) {UIMA implementation};
 
-\begin{pgfonlayer}{background}
-\node[dashed,back group, fill=orange!20] [fit=(uima) (start) (1) (2) (3)] {};
-\end{pgfonlayer}
+%\begin{pgfonlayer}{background}
+%\node[dashed,back group, fill=orange!20] [fit=(uima) (start) (1) (2) (3)] {};
+%\end{pgfonlayer}
 
 \draw[myarrows] (doc) edge (start) (start) edge (1) (1) edge (2) (2) edge (3) (3) edge (end) (end) edge (struc);
 \end{tikzpicture}
 }
-\caption{IE Process Pipeline.}
+\caption{IE process pipeline.}
 \end{figure}
 \end{frame}
 
-\begin{frame}{POS-Tagging}
+\begin{frame}{Named Entity Recognition}
 \begin{figure}
 \tikzstyle{block} = [rectangle, draw, fill=blue!10, rounded corners, text centered, minimum width=1.5em,font=\footnotesize\ttfamily, node distance=2em]
 \begin{tikzpicture}[node distance = .5em, font=\bfseries\large,baseline, text height=1.5ex,text depth=.25ex,highlight/.style={text=orange}]
@@ -323,8 +319,8 @@ With \textbf{\textit{\textsc{HeidelTime}}} temporal expressions are mapped to TI
 \textbf{Subject}&\textbf{Relation}&\textbf{Object}\\\midrule
 quick brown fox&jump over&lazy dog\\
 K 612&dates&\texttt{03}\footnote{\enquote{4th century A.\,D.}}\\
-Form 23&dates&\texttt{XXXX-Q2 00}\footnote{\enquote{second and third quarters of the first century A.\,D.}}\\
-Subform 23.2&dates&\texttt{XXXX-Q2 00}~~\\
+Subform 23.2&occurs&North Italy\\
+Subform 23.2&dates&\texttt{XXXX-Q2 00}\footnote{\enquote{second and third quarters of the first century A.\,D.}}\\
 \bottomrule
 \end{tabularx}\bigskip\pause
 
@@ -344,12 +340,12 @@ Subform 23.2&dates&\texttt{XXXX-Q2 00}~~\\
 
 %NOTE: supports Pleiades and GeoNames
 
-\begin{frame}{Locations with \textsc{HeidelPlace}}
-\begin{figure}
-\hspace*{-1em}\includegraphics[width=1.025\textwidth]{img/heidelplace.png}
-\caption{Screenshot of \textsc{HeidelPlace}.}
-\end{figure}
-\end{frame}
+%\begin{frame}{Locations with \textsc{HeidelPlace}}
+%\begin{figure}
+%\hspace*{-1em}\includegraphics[width=1.025\textwidth]{img/heidelplace.png}
+%\caption{Screenshot of \textsc{HeidelPlace}.}
+%\end{figure}
+%\end{frame}
 
 \section{Multilingualism}
 
@@ -394,31 +390,31 @@ Creating wordlists that project team would be most useful to describe the key fe
 Used tools and methodology developed for the ARIADNE project by the Hypermedia Research Group at the University of South Wales \newline
 \begin{itemize}
 \item Created a neutral spine based on the Getty Institute's Art and Architecture Thesaurus (AAT)
-\item This spine was poulated by memebers from partner organisations, identifying common terms and concepts within it
+\item This spine was populated by members from partner organisations, identifying common terms and concepts within it
 \item Project partners then mapped terms in their language to this neutral spine
-\item French terms supplied courtesy of a 2001 Masters thesis by Caroline SOURZAT (thanks to Eleni Schindler Kaudelka for identifying this on the ArchAIDE blog!)
+\item French terms supplied courtesy of a 2001 Masters thesis by Caroline \textsc{Sourzat} (thanks to Eleni Schindler Kaudelka for identifying this on the ArchAIDE blog!)
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Mapping terms and concepts (part 1)}
 Often this was very straightforward, for example:
 \begin{itemize}
-\item The Italian terms \emph{graffita, graffita a punta, graffita a stecca} = "sgraffito" (http://vocab.getty.edu/aat/300266416)
-\item The Spanish term \emph{Cántaro} = "jars" (http://vocab.getty.edu/aat/300195348)
-\item The German terms \emph{gebogener Henkel, Ohrförmiger Henkel, langer Vertikalhenkel} = "handles" (http://vocab.getty.edu/aat/300266416)
+\item The Italian terms \emph{graffita, graffita a punta, graffita a stecca} = \enquote{sgraffito} (http://vocab.getty.edu/aat/300266416)
+\item The Spanish term \emph{Cántaro} = \enquote{jars} (http://vocab.getty.edu/aat/300195348)
+\item The German terms \emph{gebogener Henkel, Ohrförmiger Henkel, langer Vertikalhenkel} = \enquote{handles} (http://vocab.getty.edu/aat/300266416)
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Mapping terms and concepts (part 2)}
-Often this was more complicated, with  partners having differing perceptions on what to call something (e.g. "plate versus platter)\newline
+Often this was more complicated, with partners having differing perceptions on what to call something (e.g. \enquote{plate} versus \enquote{platter})\newline
 \newline
 In truth, this confusion may also be reflected by what has come out of the ground!\newline
 \newline
-An advantage of using the AAT (a "SKOS'd" thesaurus), is that ambiguity or difference in nomenclature can be resolved by  a broader term or concept, so for example...
+An advantage of using the AAT (a \enquote{SKOS'd} thesaurus), is that ambiguity or difference in nomenclature can be resolved by  a broader term or concept, so for example \dots
 \end{frame}
 
 \begin{frame}{Mapping terms and concepts (part 3)}
-Looking at the hierarchies for plate and platter in the AAT we can see that both are "dishes (vessels for food)", or even broader "culinary containers". So whole we can retain our original classifications (and this is essential for text mining), we can agree at a fundamental level \emph{what these fundamentally are}
+Looking at the hierarchies for plate and platter in the AAT we can see that both are \enquote{dishes (vessels for food)}, or even broader \enquote{culinary containers}. So whole we can retain our original classifications (and this is essential for text mining), we can agree at a fundamental level \emph{what these fundamentally are}
 \begin{center}
 \begin{figure}
 \includegraphics[width=\textwidth]{img/tim_hierarchy_plate.png}
@@ -427,17 +423,18 @@ Looking at the hierarchies for plate and platter in the AAT we can see that both
 \end{center}
 \end{frame}
 
-\section{Outlook}
+\begin{frame}{Outlook}
+\begin{itemize}
+\item Recognize reigns of emperors as \texttt{DATE} entities
+\item Coreferences in general
+\item \textsc{HeidelTime}:
 
-\begin{frame}{Challenges to meet}
-challenges:
-
-choice of tools, coreferences in text, eloquence of archaeologists, maybe calculating F-value?
-
-\textsc{HeidelTime}:\vspace{-1em}
-\begin{center}
 second and \textbf{third quarter} of the \textbf{first century A.\,D.}\quad$\longmapsto$\quad\texttt{XXXX-Q3};~~\texttt{00}
-\end{center}
+\item Returning to difference in ceramic recording details
+\item Fabric names often contain locations, e.\,g.\ \emph{Magdalensberg xyz}
+\item Location sometimes narrow, sometimes whole regions
+\item In many cases the form is not named in particular but just described
+\end{itemize}
 \end{frame}
 
 \begin{frame}{References}
